@@ -40,9 +40,6 @@ io.on("connection", (socket) => {
   });
 });
 
-setInterval(() => {
-  console.log(users)
-}, 5000);
 // httpServer.listen(process.env.PORT||3000);
 server.listen(port, () => {
   console.log('listening on : http://localhost:3000');
