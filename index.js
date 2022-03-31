@@ -1,5 +1,5 @@
-const httpServer = require("http").createServer();
-const io = require('socket.io')(httpServer, {
+// const httpServer = require("http").createServer();
+const io = require('socket.io')(process.env.PORT||3000, {
   cors: {
     origin: '*',
   }
@@ -26,4 +26,4 @@ io.on("connection", (socket) => {
     delete users[socket.id];
   });
 });
-httpServer.listen(process.env.PORT||3000);
+// httpServer.listen(process.env.PORT||3000);
