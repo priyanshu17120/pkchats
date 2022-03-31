@@ -39,7 +39,8 @@
 const form = document.getElementById("send-container");
 const messageInput = document.getElementById("messageInp");
 const messageContainer = document.querySelector(".container");
-var audio = new Audio("/Nasa.mp3");
+var audio = new Audio("/ting.mp3");
+var nasa = new Audio("/Nasa.mp3");
 
 const append = (message, position) => {
   const messageElement = document.createElement("div");
@@ -52,14 +53,15 @@ const append = (message, position) => {
   if (position == "received") {
     audio.play();
   }
+  
 };
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const message = messageInput.value;
-  if(message != ""){
-  append(`<b>You</b> : ${message}`, "sent");
-  socket.emit("send", message);
-  messageInput.value = "";
+  if(message != ""){  
+      append(`<b>You</b> : ${message}`, "sent");
+      socket.emit("send", message);
+      messageInput.value = ""; 
 }
 });
 
