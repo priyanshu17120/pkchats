@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PK's Chat</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+  <div class="container" id="container">
+    <!-- <div class="conversation conversation-container message sent">
+        <b>Harry:</b> Lorem ipsum dolor sit amet, consectetur adipisicing.
+      </div>
+      <div class="conversation conversation-container message received">
+        <b>Rohan:</b> Lorem ipsum dolor sit amet.
+      </div>
+      <div class="conversation conversation-container message sent">
+            What happened last night?
+    </div> -->
+  </div>
+  <div class="send">
+    <form action="#" id="send-container">
+      <input type="text" name="messageInp" id="messageInp" />
+      <button class="btn" type="submit">Send</button>
+    </form>
+  </div>
+</body>
+<script>
+  const element = document.getElementById('container');
+  element.scrollTop = element.scrollHeight;
+</script>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+  var socket = io();
+  
+const form = document.getElementById("send-container");
+const messageInput = document.getElementById("messageInp");
+const messageContainer = document.querySelector(".container");
+var audio = new Audio("/ting.mp3");
+
+const append = (message, position) => {
+  const messageElement = document.createElement("div");
+  messageElement.innerHTML = message;
+  messageElement.classList.add("conversation");
+  messageElement.classList.add("conversation-container");
+  messageElement.classList.add("message");
+  messageElement.classList.add(position);
+  messageContainer.append(messageElement);
+  if (position == "left") {
+    audio.play();
+  }
+};
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const message = messageInput.value;
+  if(message != ""){
+  append(`<b>You</b> : ${message}`, "sent");
+  socket.emit("send", message);
+  messageInput.value = "";
+}
+});
+
+const name = prompt("Enter your name to join");
+socket.emit("new-user-joined", name);
+
+socket.on("user-joined", (name) => {
+  append(`<b>${name}</b> joined the chat`, "received");
+});
+socket.on("receive", (data) => {
+  append(`<b>${data.name}</b> : ${data.message}`, "received");
+});
+socket.on("left", (name) => {
+  append(`<b>${name}</b> left the chat`, "received");
+});
+</script>
+<script src="index.js"></script>
+</html>

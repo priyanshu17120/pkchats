@@ -1,10 +1,23 @@
 // const httpServer = require("http").createServer();
-const io = require('socket.io')(process.env.PORT||3000, {
-  cors: {
-    origin: '*',
-  }
+// const io = require('socket.io')(httpServer, {
+//   cors: {
+//     origin: '*',
+//   }
+// });
+const port = process.env.PORT||3000
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+app.use(express.static('public'))
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
 });
-
+app.get('/index.js', (req, res) => {
+  res.sendFile(__dirname + '/index.js');
+});
 const users = {};
 
 io.on("connection", (socket) => {
@@ -26,4 +39,9 @@ io.on("connection", (socket) => {
     delete users[socket.id];
   });
 });
+
+
 // httpServer.listen(process.env.PORT||3000);
+server.listen(port, () => {
+  console.log('listening on : http://localhost:3000');
+});
