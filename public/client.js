@@ -15,19 +15,19 @@ const append = (message, position) => {
   messageElement.classList.add(position);
   messageContainer.append(messageElement);
   if (position == "received") {
-    audio.play();
+        audio.play();
   }
-  
 };
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
-    if(message != ""){  
+    if(message != ""){ 
         append(`<b>You</b> : ${message}`, "sent");
         socket.emit("send", message);
         messageInput.value = ""; 
     }
+    
 });
 
 const name = prompt("Enter your name to join");
@@ -38,6 +38,9 @@ socket.on("user-joined", (name) => {
   append(`<b>${name}</b> joined the chat`, "received");
 });
 socket.on("receive", (data) => {
+    if(data.message == "nasa"){  
+        nasa.play();
+      }
   append(`<b>${data.name}</b> : ${data.message}`, "received");
 });
 socket.on("left", (name) => {
