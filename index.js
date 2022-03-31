@@ -26,4 +26,4 @@ io.on("connection", (socket) => {
     delete users[socket.id];
   });
 });
-httpServer.listen(3000);
+httpServer.listen(process.env.PORT||3000);
