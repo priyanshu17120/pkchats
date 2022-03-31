@@ -39,6 +39,7 @@ socket.on("user-joined", (name) => {
 });
 socket.on("receive", (data) => {
     if(data.message == "nasa"){  
+        audio.pause();
         nasa.play();
       }
   append(`<b>${data.name}</b> : ${data.message}`, "received");
