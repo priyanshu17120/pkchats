@@ -1,9 +1,4 @@
-// const httpServer = require("http").createServer();
-// const io = require('socket.io')(httpServer, {
-//   cors: {
-//     origin: '*',
-//   }
-// });
+
 const port = process.env.PORT||3000
 const express = require('express');
 const app = express();
@@ -15,14 +10,27 @@ app.use(express.static('public'))
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
+
 app.get('/index.js', (req, res) => {
   res.sendFile(__dirname + '/index.js');
 });
-const users = {};
+
+let onlineUsers = 0;
+let users = {};
+app.get('/onlineusers', (req, res) => {
+  res.json(Object.keys(users).length)
+  // console.log(users);
+});
+
 
 io.on("connection", (socket) => {
   socket.on("new-user-joined", (name) => {
-    // console.log("New user", name);
+    console.log("New user", name);
+    onlineUsers = onlineUsers+1;
+    console.log(onlineUsers)
+
+    // socket.emit('user-added',users);
+
     users[socket.id] = name;
     socket.broadcast.emit("user-joined", name);
   });

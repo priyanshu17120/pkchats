@@ -1,37 +1,56 @@
 @import url("https://fonts.googleapis.com/css2?family=Bad+Script&family=Baloo+Bhaijaan+2&family=Bree+Serif&family=Noto+Serif:ital@1&family=PT+Sans:ital@1&family=Poppins:ital,wght@1,300&family=Roboto+Slab:wght@300&family=Roboto:ital@1&family=Satisfy&family=Work+Sans:ital,wght@1,300&family=Yuji+Hentaigana+Akebono&display=swap");
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-image: url(../unnamed.png);
+  background: #0b141a;
+  font-family: Segoe UI, Helvetica Neue, Helvetica, Lucida Grande, Arial, Ubuntu, Cantarell, Fira Sans, sans-serif;
 }
-.container {
-  max-width: 1031px;
-  /* background-image: url(/unnamed.png); */
-  margin: auto;
-  height: 80vh;
-  padding: 23px;
-  overflow-y: auto;
+
+.topbar {
+  width: 100%;
+  height: 12vh;
+  background: white;
+  z-index: 5;
 }
-/* .message {
-  background-color: #128c7e;
-  width: 24%;
+
+.topbar h2 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 23px;
   padding: 10px;
-  margin: 17px 12px;
-  border: 2px solid black;
-  border-radius: 10px;
-  font-family: 'Baloo Bhaijaan 2', cursive;
-} */
+  color: #8696a0;
+}
+
+.topbar h3 {
+  font-family: sans-serif;
+  font-size: 16px;
+  padding-left: 10px;
+  color: #566d7c;
+}
+
+.container {
+  margin: auto;
+  overflow-y: auto;
+  margin: 23px;
+  height: 70vh;
+}
+
 .message {
-  font-family: cursive;
   color: #000;
   clear: both;
   line-height: 18px;
   font-size: 17px;
   padding: 8px;
   position: relative;
-  margin: 8px 0;
+  margin: 18px;
   max-width: 85%;
   word-wrap: break-word;
 }
+
 .message:after {
   position: absolute;
   content: "";
@@ -39,6 +58,7 @@ body {
   height: 0;
   border-style: solid;
 }
+
 .metadata {
   display: inline-block;
   float: right;
@@ -69,30 +89,26 @@ body {
 
 .metadata .tick svg:first-child {
   -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-transform: perspective(800px) rotateY(180deg);
-          transform: perspective(800px) rotateY(180deg);
+  transform: perspective(800px) rotateY(180deg);
 }
 
 .metadata .tick svg:last-child {
   -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-transform: perspective(800px) rotateY(0deg);
-          transform: perspective(800px) rotateY(0deg);
+  transform: perspective(800px) rotateY(0deg);
 }
 
 .metadata .tick-animation svg:first-child {
   -webkit-transform: perspective(800px) rotateY(0);
-          transform: perspective(800px) rotateY(0);
+  transform: perspective(800px) rotateY(0);
 }
 
 .metadata .tick-animation svg:last-child {
   -webkit-transform: perspective(800px) rotateY(-179.9deg);
-          transform: perspective(800px) rotateY(-179.9deg);
-}
-
-.message:first-child {
-  margin: 16px 0 8px;
+  transform: perspective(800px) rotateY(-179.9deg);
 }
 
 .message.received {
@@ -125,38 +141,69 @@ body {
   right: -10px;
 }
 
+.send {
+  background: #202c33;
+  padding: 12px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
 #send-container {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: auto;
+  gap: 5px;
   text-align: center;
   max-width: 985px;
   width: 100%;
 }
+
 #messageInp {
+  background: #2a3942;
+  color: #e9edef;
   width: 90%;
-  border:none;
+  font-size: 15px;
+  border: none;
   outline: none;
-  border-radius: 6px;
+  padding: 8px;
+  border-radius: 8px;
   height: 34px;
+  word-wrap: break-word;
 }
+
 .btn {
-  width: 7%;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
   cursor: pointer;
   border: none;
   outline: none;
-  border-radius: 6px;
-  height: 34px;
+  border-radius: 50%;
+  padding: 12px;
   font-size: 18px;
+  background: transparent;
 }
+
+svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

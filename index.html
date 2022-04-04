@@ -9,12 +9,16 @@
 </head>
 
 <body>
+  <div class="topbar">
+    <h2>Pk's Chat</h2>
+    <h3><span id="usersonline"></span> <span id="userorusers">user</span> online.</h3>
+  </div>
   <div class="container" id="container">
     <!-- <div class="conversation conversation-container message sent">
-        <b>Harry:</b> Lorem ipsum dolor sit amet, consectetur adipisicing.
+ Lorem ipsum dolor sit amet, consectetur adipisicing.
       </div>
       <div class="conversation conversation-container message received">
-        <b>Rohan:</b> Lorem ipsum dolor sit amet.
+ Lorem ipsum dolor sit amet.
       </div>
       <div class="conversation conversation-container message sent">
             What happened last night?
@@ -23,7 +27,9 @@
   <div class="send">
     <form action="#" id="send-container">
       <input type="text" name="messageInp" id="messageInp" />
-      <button class="btn" type="submit">Send</button>
+      <span class="btnbox">
+      <button class="btn" type="submit"><svg viewBox="0 0 24 24" width="24" height="24" class=""><path fill="#8696a0" d="M1.101 21.757 23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path></svg></button>
+    </span>
     </form>
   </div>
 </body>
@@ -34,4 +40,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/client.js"></script>
 <script src="index.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </html>

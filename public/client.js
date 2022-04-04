@@ -3,61 +3,98 @@ var socket = io();
 const form = document.getElementById("send-container");
 const messageInput = document.getElementById("messageInp");
 const messageContainer = document.querySelector(".container");
+const messageboox = document.querySelector('#messageboox');
 var audio = new Audio("/ting.mp3");
-var nasa = new Audio("/Nasa.mp3");
 
 function scrollToBottom() {
-    // const messageeee = document.getElementsByClassName('message');
-    const container = document.getElementById('container');
-    // container.scrollTop(messageeee.outerHeight());
-    container.scrollTop = container.scrollHeight;
-    console.log(container.scrollHeight);
-    // var l = document.getElementsByClassName("message").length;
-    // document.getElementsByClassName("message")[l+1].scrollIntoView();
+  const container = document.getElementById('container');
+  container.scrollTop = container.scrollHeight + 50000;
 }
-  
+
 const append = (message, position) => {
   const messageElement = document.createElement("div");
-  messageElement.innerHTML = message;
+  messageElement.innerText = message;
   messageElement.classList.add("conversation");
   messageElement.classList.add("conversation-container");
   messageElement.classList.add("message");
   messageElement.classList.add(position);
   messageContainer.append(messageElement);
   if (position == "received") {
-        audio.play();
+    audio.play();
   }
 };
 
 form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const message = messageInput.value;
-    if(message != ""){ 
-        scrollToBottom()
-        append(`<b>You</b> : ${message}`, "sent");
-        socket.emit("send", message);
-        messageInput.value = ""; 
-    }
-    
+  e.preventDefault();
+  const message = messageInput.value;
+  if(message != ""){ 
+    scrollToBottom()
+    append(`${message}`, "sent");
+    socket.emit("send", message);
+    messageInput.value = ""; 
+  }
+  
 });
 
 const name = prompt("Enter your name to join");
 socket.emit("new-user-joined", name);
+async function aa(){
+  const usersonline = document.getElementById("usersonline");
+  const userorusers = document.getElementById("userorusers");
+  var sas = await fetch('/onlineusers')
+  var sus = await (sas).text()
+  usersonline.innerText = parseInt(sus)+1;
+  if(usersonline.innerText == 1){
+    userorusers.innerText = 'user'
+  }
+  else{
+    userorusers.innerText = 'users'
+  }
+}
+aa()
 
-append(`Hey,<b>${name}</b> Welcome To Pk's Chat`, "received");
+append(`Hey,${name} Welcome To Pk's Chat`, "received");
 socket.on("user-joined", (name) => {
+  async function aa(){
+    const usersonline = document.getElementById("usersonline");
+    const userorusers = document.getElementById("userorusers");
+    var sas = await fetch('/onlineusers')
+    var sus = await (sas).text()
+    usersonline.innerText = sus;
+    if(usersonline.innerText == 1){
+      userorusers.innerText = 'user'
+    }
+    else{
+      userorusers.innerText = 'users'
+    }
+  }
+  aa()
   scrollToBottom()
-  append(`<b>${name}</b> joined the chat`, "received");
+  append(`${name} joined the chat`, "received");
 });
 socket.on("receive", (data) => {
     scrollToBottom()
-    if(data.message == "nasa"){  
-        audio.pause();
-        nasa.play();
-      }
-  append(`<b>${data.name}</b> : ${data.message}`, "received");
+  append(`${data.name} : ${data.message}`, "received");
 });
 socket.on("left", (name) => {
+  async function aa(){
+    const usersonline = document.getElementById("usersonline");
+    const userorusers = document.getElementById("userorusers");
+    var sas = await fetch('/onlineusers')
+    var sus = await (sas).text()
+    usersonline.innerText = parseInt(sus);
+    if(usersonline.innerText == 1){
+      userorusers.innerText = 'user'
+    }
+    else{
+      userorusers.innerText = 'users'
+    }
+  }
+  aa()
     scrollToBottom()
-  append(`<b>${name}</b> left the chat`, "received");
+  append(`${name} left the chat`, "received");
 });
+
+
+
+
