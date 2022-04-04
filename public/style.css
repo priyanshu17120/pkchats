@@ -14,7 +14,7 @@ body {
 .topbar {
   width: 100%;
   height: 12vh;
-  background: white;
+  background: rgb(32, 44, 51);
   z-index: 5;
 }
 
@@ -22,14 +22,14 @@ body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 23px;
   padding: 10px;
-  color: #8696a0;
+  color: #e9edef;
 }
 
 .topbar h3 {
   font-family: sans-serif;
   font-size: 16px;
   padding-left: 10px;
-  color: #566d7c;
+  color: #e9edef;
 }
 
 .container {

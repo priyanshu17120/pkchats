@@ -15,7 +15,6 @@ app.get('/index.js', (req, res) => {
   res.sendFile(__dirname + '/index.js');
 });
 
-let onlineUsers = 0;
 let users = {};
 app.get('/onlineusers', (req, res) => {
   res.json(Object.keys(users).length)
@@ -26,8 +25,6 @@ app.get('/onlineusers', (req, res) => {
 io.on("connection", (socket) => {
   socket.on("new-user-joined", (name) => {
     console.log("New user", name);
-    onlineUsers = onlineUsers+1;
-    console.log(onlineUsers)
 
     // socket.emit('user-added',users);
 

@@ -37,6 +37,11 @@ form.addEventListener("submit", (e) => {
 });
 
 const name = prompt("Enter your name to join");
+let length = name.length;
+if(length >= 15){
+  window.location = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+}
+
 socket.emit("new-user-joined", name);
 async function aa(){
   const usersonline = document.getElementById("usersonline");
