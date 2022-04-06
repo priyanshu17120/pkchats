@@ -1,0 +1,9 @@
+[build]
+  base = "/"
+  publish = "public/"
+  command = "node index.js"
+  functions = "my_functions"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
