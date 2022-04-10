@@ -33,6 +33,7 @@ body {
 }
 
 .container {
+  position: relative;
   margin: auto;
   overflow-y: auto;
   margin: 23px;
